@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recovery852 — Hong Kong's Leading Outpatient Addiction Treatment Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       Design Tokens
+       ============================================ */
+    :root {
+      --color-cream: #F9F6F0;
+      --color-cream-deep: #F1EBE0;
+      --color-terracotta: #C28E79;
+      --color-terracotta-soft: #D9B5A4;
+      --color-terracotta-deep: #A87560;
+      --color-rose-blush: #E8D5CB;
+      --color-espresso: #2B201B;
+      --color-espresso-soft: #4A3A33;
+      --color-muted: #7A6A62;
+      --color-line: #E5DDD2;
+      --color-white: #FFFFFF;
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+
+      --shadow-soft: 0 10px 40px -15px rgba(43, 32, 27, 0.15);
+      --shadow-card: 0 20px 60px -25px rgba(43, 32, 27, 0.25);
+
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+      --max-w: 1200px;
+    }
+
+    /* ============================================
+       Reset & Base
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-espresso-soft);
+      background-color: var(--color-cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      color: var(--color-espresso);
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+      letter-spacing: -0.01em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    img { max-width: 100%; display: block; }
+
+    button { font-family: inherit; cursor: pointer; border: none; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       Reusable Components
+       ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      transition: all var(--transition);
+      box-shadow: 0 8px 20px -8px rgba(194, 142, 121, 0.6);
+    }
+    .btn:hover {
+      background: var(--color-terracotta-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -8px rgba(194, 142, 121, 0.7);
+    }
+    .btn::after {
+      content: '→';
+      transition: transform var(--transition);
+    }
+    .btn:hover::after { transform: translateX(4px); }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-terracotta-deep);
+      margin-bottom: 18px;
+      position: relative;
+      padding-left: 44px;
+    }
+    .eyebrow::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 32px;
+      height: 1px;
+      background: var(--color-terracotta);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 24px;
+    }
+
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* Decorative botanical SVG (used as background flourish) */
+    .botanical {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    /* ============================================
+       Header / Navigation
+       ============================================ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 246, 240, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+    }
+
+    .logo img {
+      height: 44px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 38px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--color-espresso-soft);
+      position: relative;
+      padding: 6px 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-terracotta);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--color-terracotta-deep); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: transparent;
+      color: var(--color-espresso);
+      border: 1px solid var(--color-espresso);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+    }
+    .nav-cta:hover {
+      background: var(--color-espresso);
+      color: var(--color-cream);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-espresso);
+      margin: 5px 0;
+      transition: all var(--transition);
+    }
+
+    /* ============================================
+       Hero
+       ============================================ */
+    .hero {
+      padding: 80px 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-terracotta-deep);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--color-line);
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-meta-item strong {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--color-espresso);
+      line-height: 1;
+    }
+    .hero-meta-item span {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 6px;
+    }
+    .hero-meta-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--color-line);
+    }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      max-width: 460px;
+      margin-left: auto;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: -30px -30px 30px 30px;
+      background: var(--color-rose-blush);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      z-index: 0;
+    }
+    .hero-visual-frame {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--color-terracotta-soft), var(--color-terracotta));
+      border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .hero-visual-frame svg {
+      width: 70%;
+      height: auto;
+      opacity: 0.85;
+    }
+    .hero-tag {
+      position: absolute;
+      bottom: 20px;
+      left: -20px;
+      background: var(--color-white);
+      padding: 14px 22px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-card);
+      z-index: 2;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .hero-tag .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6fbf6f;
+      box-shadow: 0 0 0 4px rgba(111, 191, 111, 0.2);
+    }
+
+    /* Background flourish for hero */
+    .hero-flourish {
+      position: absolute;
+      top: -50px;
+      right: -120px;
+      width: 500px;
+      opacity: 0.4;
+      z-index: 0;
+    }
+    .hero-flourish-2 {
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 380px;
+      opacity: 0.3;
+      transform: rotate(180deg);
+      z-index: 0;
+    }
+
+    /* ============================================
+       About — Comprehensive Approach
+       ============================================ */
+    .about {
+      background: var(--color-white);
+      position: relative;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image {
+      position: relative;
+    }
+    .about-image-main {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--color-rose-blush), var(--color-terracotta-soft));
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .about-image-main svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -28px;
+      right: -28px;
+      background: var(--color-espresso);
+      color: var(--color-cream);
+      padding: 24px 30px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      max-width: 220px;
+    }
+    .about-badge strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      line-height: 1;
+      color: var(--color-terracotta-soft);
+      margin-bottom: 6px;
+    }
+    .about-badge span {
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      color: rgba(249, 246, 240, 0.75);
+    }
+
+    .about-content p {
+      color: var(--color-muted);
+      margin-bottom: 18px;
+      font-size: 1.02rem;
+    }
+
+    /* ============================================
+       What We Do
+       ============================================ */
+    .services {
+      background: var(--color-cream-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    .services-flourish {
+      position: absolute;
+      top: 40px;
+      right: -50px;
+      width: 280px;
+      opacity: 0.35;
+    }
+    .services-header {
+      max-width: 720px;
+      margin: 0 auto 70px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+    .service-card {
+      background: var(--color-white);
+      padding: 44px 38px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-line);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--color-terracotta-soft);
+    }
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--color-rose-blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--color-terracotta-deep);
+    }
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .service-card p {
+      color: var(--color-muted);
+      font-size: 0.98rem;
+      margin: 0;
+    }
+
+    /* ============================================
+       Meet the Owner
+       ============================================ */
+    .owner {
+      background: var(--color-espresso);
+      color: var(--color-cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .owner-flourish {
+      position: absolute;
+      bottom: -100px;
+      right: -50px;
+      width: 380px;
+      opacity: 0.08;
+    }
+    .owner-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .owner-photo {
+      position: relative;
+    }
+    .owner-photo-frame {
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(135deg, var(--color-terracotta), var(--color-terracotta-deep));
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.5);
+    }
+    .owner-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .owner-photo-tag {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      background: var(--color-terracotta);
+      color: var(--color-white);
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .owner-content h2 {
+      color: var(--color-cream);
+      font-size: clamp(2rem, 3.6vw, 2.8rem);
+    }
+    .owner-content .eyebrow { color: var(--color-terracotta-soft); }
+    .owner-content .eyebrow::before { background: var(--color-terracotta-soft); }
+
+    .owner-name {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--color-terracotta-soft);
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .owner-bio p {
+      color: rgba(249, 246, 240, 0.75);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .owner-creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .owner-cred {
+      padding: 8px 18px;
+      background: rgba(194, 142, 121, 0.15);
+      border: 1px solid rgba(194, 142, 121, 0.3);
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      color: var(--color-terracotta-soft);
+    }
+
+    /* ============================================
+       Testimonial
+       ============================================ */
+    .testimonial {
+      background: var(--color-cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-flourish-l {
+      position: absolute;
+      top: 30%;
+      left: -100px;
+      width: 320px;
+      opacity: 0.4;
+    }
+    .testimonial-flourish-r {
+      position: absolute;
+      bottom: 10%;
+      right: -80px;
+      width: 280px;
+      opacity: 0.4;
+      transform: scaleX(-1);
+    }
+    .testimonial-card {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--color-white);
+      padding: 70px 70px 60px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      z-index: 2;
+    }
+    .testimonial-quote-mark {
+      font-family: var(--font-serif);
+      font-size: 8rem;
+      color: var(--color-terracotta-soft);
+      line-height: 0.7;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.4;
+    }
+    .testimonial-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      line-height: 1.5;
+      color: var(--color-espresso);
+      margin: 0 0 36px;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-stars {
+      display: inline-flex;
+      gap: 4px;
+      color: #E0A95F;
+      margin-bottom: 18px;
+      font-size: 1.1rem;
+    }
+    .testimonial-author {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--color-espresso);
+      margin: 0;
+    }
+    .testimonial-author-meta {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* ============================================
+       Contact
+       ============================================ */
+    .contact {
+      background: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info p {
+      color: var(--color-muted);
+      font-size: 1.02rem;
+      margin-bottom: 30px;
+    }
+    .contact-detail {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .contact-detail:last-child { border-bottom: none; }
+    .contact-detail-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--color-rose-blush);
+      color: var(--color-terracotta-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-detail-text strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--color-espresso);
+      margin-bottom: 4px;
+    }
+    .contact-detail-text span {
+      font-size: 0.92rem;
+      color: var(--color-muted);
+    }
+
+    .contact-form {
+      background: var(--color-cream);
+      padding: 50px 44px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-espresso);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--color-white);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--color-espresso);
+      transition: all var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-terracotta);
+      box-shadow: 0 0 0 4px rgba(194, 142, 121, 0.12);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 24px 0 28px;
+    }
+    .form-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: var(--color-terracotta);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .form-check label {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .form-submit {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ============================================
+       Footer
+       ============================================ */
+    .site-footer {
+      background: var(--color-espresso);
+      color: rgba(249, 246, 240, 0.7);
+      padding: 70px 0 30px;
+      position: relative;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+    .footer-brand img {
+      height: 44px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    .footer-brand p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .footer-col h4 {
+      color: var(--color-cream);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+    .footer-col ul a {
+      font-size: 0.92rem;
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover {
+      color: var(--color-terracotta-soft);
+    }
+    .footer-bottom {
+      padding-top: 30px;
+      border-top: 1px solid rgba(249, 246, 240, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================
+       Responsive
+       ============================================ */
+    @media (max-width: 960px) {
+      section { padding: 70px 0; }
+
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: block; }
+
+      .hero { padding: 50px 0 80px; }
+      .hero-grid,
+      .about-grid,
+      .owner-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      .hero-visual { margin: 0 auto; max-width: 360px; }
+      .hero-meta { flex-wrap: wrap; gap: 18px; }
+      .hero-meta-divider { display: none; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .owner-photo-frame {
+        max-width: 380px;
+        margin: 0 auto;
+      }
+
+      .testimonial-card {
+        padding: 55px 30px 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container { padding: 0 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 36px 26px; }
+      .about-badge {
+        right: 0;
+        bottom: -20px;
+        padding: 18px 22px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       Animations
+       ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title,
+    .hero-sub,
+    .hero .btn,
+    .hero-meta {
+      animation: fadeUp 0.8s ease-out backwards;
+    }
+    .hero-sub { animation-delay: 0.15s; }
+    .hero .btn { animation-delay: 0.3s; }
+    .hero-meta { animation-delay: 0.45s; }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       Header
+  ============================================ -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a href="#" class="logo">
+          <img src="https://via.placeholder.com/150x50?text=New+Logo" alt="Recovery852 logo" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Addiction Recovery</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Request A Call</a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================
+       Hero
+  ============================================ -->
+  <section class="hero" id="home">
+    <!-- Botanical flourish (top right) -->
+    <svg class="hero-flourish" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C28E79" stroke-width="1.2">
+      <path d="M200,30 C260,80 290,160 270,240 C260,290 220,330 170,340" />
+      <path d="M250,90 C275,75 305,80 320,100" />
+      <path d="M260,80 Q280,60 305,72" />
+      <path d="M275,160 C300,150 325,160 335,180" />
+      <path d="M285,150 Q310,135 332,155" />
+      <path d="M260,240 C285,230 312,242 320,265" />
+      <path d="M270,230 Q295,215 317,238" />
+      <ellipse cx="270" cy="80" rx="14" ry="6" transform="rotate(-30 270 80)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+      <ellipse cx="290" cy="150" rx="14" ry="6" transform="rotate(-20 290 150)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+      <ellipse cx="275" cy="230" rx="14" ry="6" transform="rotate(-25 275 230)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+    </svg>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Recovery852</span>
+          <h1 class="hero-title">
+            Empowering Your <em>Journey</em> to Sobriety: Expert Addiction Recovery Resources.
+          </h1>
+          <p class="hero-sub">Hong Kong's Leading Outpatient Addiction Treatment Centre — personalized, evidence-based care tailored to your individual needs.</p>
+          <a href="#contact" class="btn">Request A Call</a>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <strong>15+</strong>
+              <span>Years Experience</span>
+            </div>
+            <div class="hero-meta-divider"></div>
+            <div class="hero-meta-item">
+              <strong>3,000+</strong>
+              <span>Clinical Hours</span>
+            </div>
+            <div class="hero-meta-divider"></div>
+            <div class="hero-meta-item">
+              <strong>ISSUP</strong>
+              <span>Certified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-visual-frame">
+            <!-- Decorative botanical leaves SVG -->
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#F9F6F0" stroke-width="1.5">
+              <path d="M150,50 C170,90 175,140 165,190 C160,220 145,245 130,260" />
+              <path d="M165,90 C190,80 215,90 225,115" />
+              <path d="M170,80 Q195,65 220,88" />
+              <ellipse cx="175" cy="85" rx="18" ry="7" transform="rotate(-25 175 85)" fill="#F9F6F0" fill-opacity="0.35" stroke="none" />
+              <path d="M170,150 C200,145 225,160 232,185" />
+              <path d="M175,142 Q205,125 230,148" />
+              <ellipse cx="180" cy="148" rx="20" ry="7" transform="rotate(-15 180 148)" fill="#F9F6F0" fill-opacity="0.35" stroke="none" />
+              <path d="M150,220 C125,225 100,215 90,195" />
+              <path d="M145,212 Q115,200 92,222" />
+              <ellipse cx="140" cy="215" rx="20" ry="7" transform="rotate(15 140 215)" fill="#F9F6F0" fill-opacity="0.35" stroke="none" />
+              <circle cx="150" cy="50" r="6" fill="#F9F6F0" fill-opacity="0.5" stroke="none" />
+            </svg>
+          </div>
+          <div class="hero-tag">
+            <span class="dot"></span>
+            <span>Confidential &amp; Compassionate Care</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       About — Comprehensive Approach
+  ============================================ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <div class="about-image-main">
+            <!-- Decorative botanical pattern -->
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#F9F6F0" stroke-width="1.2">
+              <path d="M200,60 C230,120 240,200 220,280 C210,320 185,355 155,370" />
+              <path d="M225,130 C260,118 295,130 308,158" />
+              <path d="M230,120 Q265,100 305,128" />
+              <ellipse cx="240" cy="125" rx="22" ry="8" transform="rotate(-25 240 125)" fill="#F9F6F0" fill-opacity="0.3" stroke="none" />
+              <path d="M232,210 C270,202 305,218 315,248" />
+              <path d="M238,200 Q275,180 312,205" />
+              <ellipse cx="248" cy="207" rx="24" ry="8" transform="rotate(-15 248 207)" fill="#F9F6F0" fill-opacity="0.3" stroke="none" />
+              <path d="M200,300 C170,308 140,300 122,278" />
+              <path d="M192,292 Q160,278 124,302" />
+              <ellipse cx="180" cy="298" rx="22" ry="8" transform="rotate(15 180 298)" fill="#F9F6F0" fill-opacity="0.3" stroke="none" />
+              <path d="M150,80 C120,90 95,80 80,55" />
+              <ellipse cx="130" cy="83" rx="20" ry="7" transform="rotate(20 130 83)" fill="#F9F6F0" fill-opacity="0.3" stroke="none" />
+              <circle cx="200" cy="60" r="5" fill="#F9F6F0" fill-opacity="0.5" stroke="none" />
+            </svg>
+          </div>
+          <div class="about-badge">
+            <strong>100%</strong>
+            <span>Confidential outpatient care, tailored for you.</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="eyebrow">About Us</span>
+          <h2 class="section-title">Comprehensive <em style="color: var(--color-terracotta-deep); font-style: italic;">Approach</em></h2>
+          <p>We understand the courage it takes to seek help on your journey to recovery. Whether you're struggling with substance abuse, gambling addiction, or any other addictive behavior, our center is here to provide you with the support and resources you need to reclaim your life.</p>
+          <p>Our dedicated team of professionals is committed to offering personalized care tailored to your individual needs and circumstances.</p>
+          <a href="#contact" class="btn" style="margin-top: 16px;">Begin Your Journey</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       What We Do
+  ============================================ -->
+  <section class="services">
+    <svg class="services-flourish" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C28E79" stroke-width="1.2">
+      <path d="M150,40 C175,90 180,150 165,210" />
+      <path d="M175,90 C200,80 220,90 230,110" />
+      <ellipse cx="185" cy="88" rx="16" ry="6" transform="rotate(-25 185 88)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+      <path d="M175,160 C200,155 220,165 230,185" />
+      <ellipse cx="185" cy="160" rx="16" ry="6" transform="rotate(-15 185 160)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+    </svg>
+
+    <div class="container">
+      <div class="services-header">
+        <span class="eyebrow" style="left: 50%; transform: translateX(-50%); padding-left: 44px;">Our Services</span>
+        <h2 class="section-title">What We <em style="font-style: italic; color: var(--color-terracotta-deep);">Do</em></h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3>Substance Recovery</h3>
+          <p>Within Recovery852, we specialize in young adults, adults, and women grappling with substance abuse, encompassing but not limited to alcohol, methamphetamine, prescription medications, and more.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Process Addictions</h3>
+          <p>Additionally, we provide support to clients contending with process addictions such as sex and gambling. Utilizing evidence-based education and therapeutic methodologies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       Meet the Owner
+  ============================================ -->
+  <section class="owner">
+    <svg class="owner-flourish" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#F9F6F0" stroke-width="1.2">
+      <path d="M200,30 C230,90 240,180 220,260 C210,310 180,350 140,365" />
+      <path d="M230,100 C265,88 300,100 312,130" />
+      <ellipse cx="245" cy="98" rx="20" ry="7" transform="rotate(-25 245 98)" fill="#F9F6F0" fill-opacity="0.4" stroke="none" />
+      <path d="M235,190 C272,182 305,200 315,225" />
+      <ellipse cx="250" cy="190" rx="22" ry="7" transform="rotate(-15 250 190)" fill="#F9F6F0" fill-opacity="0.4" stroke="none" />
+    </svg>
+
+    <div class="container">
+      <div class="owner-grid">
+        <div class="owner-photo">
+          <div class="owner-photo-frame">
+            <img src="https://via.placeholder.com/300x300?text=Profile+Image" alt="Grant Sanders, Founder" />
+          </div>
+          <div class="owner-photo-tag">Founder</div>
+        </div>
+
+        <div class="owner-content">
+          <span class="eyebrow">Meet the Owner</span>
+          <h2>Grant Sanders</h2>
+          <p class="owner-name">Registered Personal Recovery Coach</p>
+          <div class="owner-bio">
+            <p>Grant Sanders is a registered personal recovery coach and member of the International Society of Substance Use Professionals (ISSUP).</p>
+            <p>Grant has over fifteen years of experience and over 3,000 hours of clinical experience working in addiction recovery. He has a Degree in Social Science. Grant is a US licensed and accredited, internationally certified addiction professional. He completed training in evidence-based counselling therapies like Motivational Interviewing for Addiction and Acceptance Commitment Therapy (ACT).</p>
+          </div>
+          <div class="owner-creds">
+            <span class="owner-cred">ISSUP Member</span>
+            <span class="owner-cred">15+ Years Experience</span>
+            <span class="owner-cred">US Licensed</span>
+            <span class="owner-cred">ACT Certified</span>
+            <span class="owner-cred">Motivational Interviewing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       Testimonial
+  ============================================ -->
+  <section class="testimonial">
+    <svg class="testimonial-flourish-l" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C28E79" stroke-width="1.2">
+      <path d="M50,150 C100,100 175,90 230,120" />
+      <path d="M90,130 C115,115 140,118 155,138" />
+      <ellipse cx="105" cy="125" rx="18" ry="6" transform="rotate(15 105 125)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+      <path d="M160,108 C185,95 210,98 225,118" />
+      <ellipse cx="180" cy="105" rx="18" ry="6" transform="rotate(10 180 105)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+    </svg>
+    <svg class="testimonial-flourish-r" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C28E79" stroke-width="1.2">
+      <path d="M50,150 C100,100 175,90 230,120" />
+      <path d="M90,130 C115,115 140,118 155,138" />
+      <ellipse cx="105" cy="125" rx="18" ry="6" transform="rotate(15 105 125)" fill="#C28E79" fill-opacity="0.3" stroke="none" />
+    </svg>
+
+    <div class="container">
+      <div class="testimonial-card">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-quote">Grant has walked the path of addiction in his life and turned this affliction into a gift to help others on their journey to recovery. If you are wanting to help yourself or a loved one you can't go wrong with Recovery852!!</p>
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-author">Kevin Mommen</p>
+        <p class="testimonial-author-meta">Verified Review</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       Contact
+  ============================================ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow">Contact Us</span>
+          <h2 class="section-title">Get in <em style="color: var(--color-terracotta-deep); font-style: italic;">Touch</em></h2>
+          <p>Reaching out is the first step. Our team responds personally and confidentially — usually within the same business day.</p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Visit Us</strong>
+              <span>Recovery852 — Causeway Bay, Hong Kong</span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Call Us</strong>
+              <span>Confidential consultation available</span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Email Us</strong>
+              <span>hello@recovery852.com</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you — your message has been received.');">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input type="text" id="fullname" placeholder="Enter your full name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="Enter your mobile number" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your valid email address" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">How Can We Help?</label>
+            <textarea id="message" placeholder="Please type your message" required></textarea>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="consent" required />
+            <label for="consent">I agree to allow this site to store and process the personal information submitted.</label>
+          </div>
+
+          <button type="submit" class="btn form-submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       Footer
+  ============================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://via.placeholder.com/150x50?text=New+Logo" alt="Recovery852" />
+          <p>Hong Kong's leading outpatient addiction treatment centre. Compassionate, confidential, and evidence-based care for individuals and families on the journey to recovery.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Substance Recovery</a></li>
+            <li><a href="#">Process Addictions</a></li>
+            <li><a href="#">Family Support</a></li>
+            <li><a href="#">Recovery Coaching</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#contact">Request a Call</a></li>
+            <li><a href="mailto:hello@recovery852.com">Email Us</a></li>
+            <li>Causeway Bay, HK</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Recovery852. All rights reserved.</span>
+        <span>Confidential &amp; Compassionate Care</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple mobile menu toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isOpen = links.style.display === 'flex';
+        links.style.display = isOpen ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '100%';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'var(--color-cream)';
+        links.style.padding = '24px';
+        links.style.gap = '18px';
+        links.style.borderBottom = '1px solid var(--color-line)';
+      });
+    }
+  </script>
+
+</body>
+</html>
